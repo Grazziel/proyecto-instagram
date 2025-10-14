@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería con Navbar</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+<body>
+
+<nav class="navbar bg-body-tertiary fixed-top">
+  <div class="container-fluid">
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384031.png" 
+         alt="Logo Instagram contorno negro" width="40" height="40" class="me-2">
+    <a class="navbar-brand" href="#">Instagram</a>
+
+    <div class="d-flex ms-auto">
+      <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#infoModal">
+        Create a new post
+      </button>
+
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="menuOpciones" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-gear-fill"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuOpciones">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Accessibility</a></li>
+          <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+          <li><a class="dropdown-item text-danger" href="#">Log out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="infoModalLabel">Crea un nuevo post!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p>Caption:</p>
+        <textarea class="form-control mb-2" rows="3" placeholder="Introduce la foto que quieres publicar..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-success me-2">Publicar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-light bg-light mt-5 pt-5">
+  <div class="container d-flex justify-content-center">
+    <form class="d-flex gap-2">
+      <button class="btn btn-sm btn-outline-secondary" type="button" id="btnSinTexto">
+        <i class="bi bi-grid-3x3"></i>
+      </button>
+      <button class="btn btn-sm btn-outline-secondary" type="button" id="btnConTexto">
+        <i class="bi bi-square-fill"></i>
+      </button>
+    </form>
+  </div>
+</nav>
+
+<div class="container my-4">
+  <div class="row g-4" id="galeria"></div>
+</div>
+
+<!-- SCRIPT  -SI ESTAS CORRIGIENDO MI PROYECTO QUIERO QUE SEPAS QUE LA PARTE DEL SCRIPT NO LA HE ENTENDIDO Y TUVE QUE PEDIR AYUDAR AL GPT -->
+<script>
+  const fotos = [
+    { titulo: "Excursión al lago", texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470" },
+    { titulo: "Amanecer", texto: "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere.", url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb" },
+    { titulo: "Cielo estrellado", texto: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", url: "https://images.unsplash.com/photo-1519681393784-d120267933ba" },
+    { titulo: "Calma", texto: "Curabitur blandit tempus porttitor. Donec ullamcorper nulla non metus auctor.", url: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e" },
+    { titulo: "Nuevas oportunidades", texto: "Integer posuere erat a ante venenatis dapibus posuere velit aliquet.", url: "https://images.unsplash.com/photo-1481277542470-605612bd2d61" },
+    { titulo: "A la espera", texto: "Etiam porta sem malesuada magna mollis euismod.", url: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308" },
+    { titulo: "Orilla", texto: "Nulla vitae elit libero, a pharetra augue.", url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e" },
+    { titulo: "Naranja", texto: "Maecenas sed diam eget risus varius blandit sit amet non magna.", url: "https://images.unsplash.com/photo-1495567720989-cebdbdd97913" },
+    { titulo: "Rj / Brasil", texto: "Praesent commodo cursus magna, vel scelerisque nisl consectetur.", url: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325" }
+  ];
+
+  const galeria = document.getElementById("galeria");
+
+  // Mostrar todas las fotos sin texto
+  document.getElementById("btnSinTexto").addEventListener("click", () => {
+    galeria.innerHTML = fotos.map(f => `
+      <div class="col-sm-6 col-md-4">
+        <div class="card shadow-sm">
+          <img src="${f.url}" class="card-img-top" alt="${f.titulo}">
+        </div>
+      </div>
+    `).join('');
+  });
+
+  // Mostrar fotos con título y texto
+  document.getElementById("btnConTexto").addEventListener("click", () => {
+    galeria.innerHTML = fotos.map(f => `
+      <div class="col-sm-6 col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">${f.titulo}</h5>
+          </div>
+          <img src="${f.url}" class="card-img-top" alt="${f.titulo}">
+          <div class="card-body">
+            <p class="card-text">${f.texto}</p>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  });
+
+  // Mostrar por defecto las fotos sin texto al cargar
+  document.getElementById("btnSinTexto").click();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</body>
+</html>
